@@ -8,9 +8,9 @@ public class Main {
         // Task 1
         System.out.println("Задание 1");
         int year = setYear();
-        int year1 = getYear(year);
+        getYear(year);
 
-      // Task 2
+        // Task 2
         System.out.println("  ");
         System.out.println("Задание 2");
         System.out.print("Введите тип операционной ОС: 0 - iOS, 1 - Android ");
@@ -18,14 +18,14 @@ public class Main {
         System.out.print("Введите год выпуска телефона : ");
         int phoneYear1 = setYearSystem();
 
-        int client1 = getTypeOperationSystem(typeOperationSystem1, phoneYear1);
+        getTypeOperationSystem(typeOperationSystem1, phoneYear1);
 
         // Task 3
         System.out.println("  ");
         System.out.println("Задание 3");
         System.out.print("Введите рассотояние от офиса до адреса доставки ");
         int distance = getDeliveryDistance();
-        int time = getTimeDelivery(distance);
+        getTimeDelivery(distance);
 
     }
 
@@ -35,38 +35,38 @@ public class Main {
         System.out.println("Введите год ");
         return leapYear.nextInt();
     }
+
     public static int getYear(int year) {
-        if (year >= 1584) {
-            if (isLeapYear(year)) {
-                System.out.println(year + "  год високосный");
-            } else {
-                System.out.println(year + "  год невисокосный");
-            }
-        } else {
+        if (year >= 1584 && isLeapYear(year)) {
+            System.out.println(year + "  год високосный");
+        } else if (year < 1584) {
             System.out.println("Високосный год ввели только в 1584");
+        } else {
+            System.out.println(year + "  год невисокосный");
         }
         return year;
+
     }
 
 
     public static boolean isLeapYear(int year) {
-        if (year % 4 != 0) {
-            return false;
-        }
-        if (year % 100 == 0 && year % 400 != 0) {
+        if ((year % 4 != 0) && (year % 400 != 0) || (year % 100 == 0)) {
             return false;
         }
         return true;
     }
-        public static int setTypeOperationSystem() {
+
+    public static int setTypeOperationSystem() {
         Scanner typeOperationSystem = new Scanner(System.in);
         return typeOperationSystem.nextInt();
     }
+
     public static int setYearSystem() {
         Scanner phoneYear = new Scanner(System.in);
         return phoneYear.nextInt();
 
     }
+
     public static int getTypeOperationSystem(int client, int clientDeviceYear) {
         int currentYear = LocalDate.now().getYear();
         if (client == 0 & clientDeviceYear <= currentYear) {
@@ -82,11 +82,11 @@ public class Main {
     }
 
 
-
     public static int getDeliveryDistance() {
         Scanner deliveryDistance = new Scanner(System.in);
         return deliveryDistance.nextInt();
     }
+
     public static int getTimeDelivery(int deliveryDistance) {
         int time = 1;
         int shortDistance = 20;
