@@ -1,17 +1,111 @@
+import java.time.LocalDate;
+import java.util.Scanner;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        // Task 1
+        System.out.println("Задание 1");
+        int year = setYear();
+        int year1 = getYear(year);
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+      // Task 2
+        System.out.println("  ");
+        System.out.println("Задание 2");
+        System.out.print("Введите тип операционной ОС: 0 - iOS, 1 - Android ");
+        int typeOperationSystem1 = setTypeOperationSystem();
+        System.out.print("Введите год выпуска телефона : ");
+        int phoneYear1 = setYearSystem();
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        int client1 = getTypeOperationSystem(typeOperationSystem1, phoneYear1);
+
+        // Task 3
+        System.out.println("  ");
+        System.out.println("Задание 3");
+        System.out.print("Введите рассотояние от офиса до адреса доставки ");
+        int distance = getDeliveryDistance();
+        int time = getTimeDelivery(distance);
+
+    }
+
+
+    public static int setYear() {
+        Scanner leapYear = new Scanner(System.in);
+        System.out.println("Введите год ");
+        return leapYear.nextInt();
+    }
+    public static int getYear(int year) {
+        if (year >= 1584) {
+            if (isLeapYear(year)) {
+                System.out.println(year + "  год високосный");
+            } else {
+                System.out.println(year + "  год невисокосный");
+            }
+        } else {
+            System.out.println("Високосный год ввели только в 1584");
         }
+        return year;
+    }
+
+
+    public static boolean isLeapYear(int year) {
+        if (year % 4 != 0) {
+            return false;
+        }
+        if (year % 100 == 0 && year % 400 != 0) {
+            return false;
+        }
+        return true;
+    }
+        public static int setTypeOperationSystem() {
+        Scanner typeOperationSystem = new Scanner(System.in);
+        return typeOperationSystem.nextInt();
+    }
+    public static int setYearSystem() {
+        Scanner phoneYear = new Scanner(System.in);
+        return phoneYear.nextInt();
+
+    }
+    public static int getTypeOperationSystem(int client, int clientDeviceYear) {
+        int currentYear = LocalDate.now().getYear();
+        if (client == 0 & clientDeviceYear <= currentYear) {
+            System.out.println("Установите облегченную версию приложения для iOS по ссылке");
+        } else if (client == 0 & clientDeviceYear > currentYear) {
+            System.out.println("Установите версию приложения для iOS по ссылке");
+        } else if (client == 1 & clientDeviceYear > currentYear) {
+            System.out.println("Установите версию приложения для Android по ссылке");
+        } else if (client == 1 & clientDeviceYear <= currentYear) {
+            System.out.println("Установите облегченную версию приложения для Android по ссылке");
+        }
+        return client & clientDeviceYear;
+    }
+
+
+
+    public static int getDeliveryDistance() {
+        Scanner deliveryDistance = new Scanner(System.in);
+        return deliveryDistance.nextInt();
+    }
+    public static int getTimeDelivery(int deliveryDistance) {
+        int time = 1;
+        int shortDistance = 20;
+        int middleDistance = 60;
+        int longDistance = 100;
+        if (deliveryDistance <= shortDistance) {
+            System.out.println("Ваша карта будет доставлена через " + time + " день");
+        } else if (deliveryDistance <= middleDistance) {
+            System.out.println("Ваша карта будет доставлена через " + (time + 1) + " дня");
+        } else if (deliveryDistance <= longDistance) {
+            System.out.println("Ваша карта будет доставлена через " + (time + 2) + " дня");
+        } else {
+            System.out.println("Доставка не осуществляется ");
+        }
+        return deliveryDistance;
+
     }
 }
+
+
+
+
